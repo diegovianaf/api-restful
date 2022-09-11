@@ -1,5 +1,5 @@
 const express = require('express')
-const path = require('path')
+const cors = require('cors')
 
 const db = require('./database/db')
 const routes = require('./routes/routes')
@@ -7,6 +7,15 @@ const routes = require('./routes/routes')
 const app = express()
 
 db.connect()
+
+const allowedOrigins = [
+  'http://127.0.0.1:5500',
+  'http://127.0.0.1:5501',
+]
+
+app.use(cors({
+  origin: allowedOrigins
+}))
 
 app.use(express.json())
 
